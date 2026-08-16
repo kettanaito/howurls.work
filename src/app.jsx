@@ -1,33 +1,20 @@
 import React, { useMemo, useState } from 'react'
 import { FormattedMessage, IntlProvider } from 'react-intl'
 import { useLocation } from 'react-router'
-import styled from 'styled-components'
-import { Grid } from './components/Grid'
-import { Header } from './components/Header'
-import { Footer } from './components/Footer'
-import { UrlPreview } from './components/UrlPreview'
-import { LocaleContext } from './LocaleProvider'
+import { Grid } from './components/grid'
+import { Header } from './components/header'
+import { Footer } from './components/footer'
+import { UrlPreview } from './components/url-preview'
+import { LocaleContext } from './locale-provider'
 
-const PlaceholderText = styled.p`
-  position: absolute;
-  text-align: center;
-  top: 125%;
-  left: 0;
-  right: 0;
+const localeModules = import.meta.glob('./locales/*.json', {
+  eager: true,
+  import: 'default',
+})
 
-  @media (min-width: 768px) {
-    top: -50%;
-  }
-`
-
-const MainContainer = styled.div`
-  transition: margin 0.5s ease;
-
-  @media (min-width: 768px) and (min-height: 1000px) {
-    margin-top: 50%;
-    transform: translateY(50%);
-  }
-`
+const getMessages = (locale) => {
+  return localeModules[`./locales/${locale.toLowerCase()}.json`]
+}
 
 function App() {
   const defaultLocale =
@@ -39,13 +26,15 @@ function App() {
 
   const [locale, setLocale] = useState(defaultLocale)
   const messages = useMemo(() => {
-    try {
-      return require(`./locales/${locale}.json`)
-    } catch (error) {
-      // Fallback to English and clean a potentially corrupted storage
-      localStorage.removeItem('locale')
-      return require('./locales/en-US.json')
+    const localeMessages = getMessages(locale)
+
+    if (localeMessages) {
+      return localeMessages
     }
+
+    // Fallback to English and clean a potentially corrupted storage
+    localStorage.removeItem('locale')
+    return getMessages('en-US')
   }, [locale])
 
   const location = useLocation()
@@ -57,14 +46,14 @@ function App() {
         <Header />
         <main>
           <Grid className="relative">
-            <MainContainer>
+            <div className="[transition:margin_0.5s_ease] tall:mt-[50%] tall:translate-y-[50%]">
               {isRoot && (
-                <PlaceholderText>
+                <p className="absolute top-[125%] left-0 right-0 text-center md:-top-1/2">
                   <FormattedMessage id="homepage.urlPreview.placeholder" />
-                </PlaceholderText>
+                </p>
               )}
               <UrlPreview />
-            </MainContainer>
+            </div>
           </Grid>
         </main>
         <Footer />

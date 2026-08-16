@@ -1,21 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@400;700&display=swap');
+@import 'tailwindcss';
 
-* {
-  box-sizing: border-box;
-}
+/* Popovers change position and size when the viewport is tall enough
+   to fit them around the URL preview. */
+@custom-variant tall (@media (min-width: 768px) and (min-height: 1000px));
 
-html {
+@theme static {
   --color-primary: hsl(220, 70%, 60%);
   --color-gray-dim: hsla(220, 15%, 40%, 0.04);
   --color-black: hsl(220, 25%, 20%);
   --color-gray: hsl(220, 15%, 40%);
 
-  --font-family-regular: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
-  --font-family-mono: 'Roboto Mono', Menlo, Consolas, 'Roboto Mono',
-  'Droid Sans Mono', 'Liberation Mono', Courier, monospace;
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-mono:
+    'Roboto Mono', Menlo, Consolas, 'Droid Sans Mono', 'Liberation Mono',
+    Courier, monospace;
+}
 
+html {
   height: 100%;
   font-size: 14px;
   line-height: 1.6;
@@ -29,14 +33,25 @@ body {
 
   background-color: var(--color-gray-dim);
   color: var(--color-gray);
-  font-family: var(--font-family-regular);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Restore the default text flow that Tailwind's preflight resets. */
+p {
+  margin-block: 1em;
+}
+
+ul {
+  margin-block: 1em;
+  padding-inline-start: 40px;
+  list-style: disc;
+}
+
 code {
   padding: 0 4px;
-  font-family: var(--font-family-mono);
+  font-family: var(--font-mono);
   background-color: #fff;
   border: 1px solid hsla(0, 0%, 0%, 0.05);
   border-radius: 2px;
@@ -67,10 +82,6 @@ p:last-child {
 
 p:first-of-type {
   margin-top: 0;
-}
-
-.relative {
-  position: relative;
 }
 
 @media (min-width: 768px) {
