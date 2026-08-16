@@ -15,7 +15,7 @@ export const Footer = () => {
             values={{
               author: (
                 <a
-                  href="https://twitter.com/kettanaito"
+                  href="https://kettanaito.com/"
                   title="kettanaito's twitter"
                   target="_blank"
                   rel="noopener noreferrer"
