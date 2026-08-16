@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { Heading } from './Heading'
 import { Chunk } from './Chunk'
 
@@ -60,18 +60,18 @@ const UrlBox = styled.div`
     font-family: inherit;
     text-decoration: none;
 
-    :focus {
+    &:focus {
       outline: 0;
       border-bottom: 1px dotted var(--color-primary);
       color: var(--color-primary);
       margin-bottom: -1px;
     }
 
-    :hover {
+    &:hover {
       color: var(--color-black);
     }
 
-    :hover:not(.active) {
+    &:hover:not(.active) {
       border-bottom: 1px dotted var(--color-primary);
       margin-bottom: -1px;
     }

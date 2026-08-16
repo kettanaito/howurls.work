@@ -1,9 +1,9 @@
 import React, { useMemo, useCallback } from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router'
 import styled, { css } from 'styled-components'
 
 const Container = styled.span`
-  --color-primary: ${({ color }) => color};
+  --color-primary: ${({ $color }) => $color};
 
   @media (min-width: 768px) {
     position: relative;
@@ -34,8 +34,8 @@ const Popover = styled.div`
     top: initial;
     width: 370px;
 
-    ${({ orientation }) => {
-      switch (orientation) {
+    ${({ $orientation }) => {
+      switch ($orientation) {
         case 'top':
           return css`
             bottom: var(--offset);
@@ -49,8 +49,8 @@ const Popover = styled.div`
       }
     }}
 
-    ${({ align }) => {
-      switch (align) {
+    ${({ $align }) => {
+      switch ($align) {
         case 'right':
           return css`
             right: 0;
@@ -84,25 +84,25 @@ export const Chunk = ({
   url,
 }) => {
   const location = useLocation()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const isActive = useMemo(() => {
     return location.pathname.includes(url)
   }, [location.pathname, url])
 
   const handleChunkClick = useCallback(() => {
-    history.replace(url)
-  }, [url, history])
+    navigate(`/${url}`, { replace: true })
+  }, [url, navigate])
 
   const linkClassNames = [isActive && 'active'].filter(Boolean).join(' ')
 
   return (
-    <Container color={color}>
+    <Container $color={color}>
       <button className={linkClassNames} onClick={handleChunkClick}>
         {children}
       </button>
       {isActive && explanation && (
-        <Popover orientation={orientation} align={align}>
+        <Popover $orientation={orientation} $align={align}>
           {explanation()}
         </Popover>
       )}

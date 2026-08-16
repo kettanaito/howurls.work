@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import styled from 'styled-components'
 import { ReactComponent as Logo } from '../images/logo-small.svg'
 import { Grid } from './Grid'
@@ -15,7 +15,7 @@ const LogoLink = styled(Link)`
   display: inline-flex;
   border-radius: 2px;
 
-  :focus {
+  &:focus {
     outline: 0;
     box-shadow: 0 0 0 3px hsla(9, 83%, 58%, 0.3);
   }

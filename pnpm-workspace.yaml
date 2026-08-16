@@ -1,0 +1,7 @@
+allowBuilds:
+  core-js: false
+  core-js-pure: false
+
+peerDependencyRules:
+  allowedVersions:
+    'react-scripts>typescript': '5'

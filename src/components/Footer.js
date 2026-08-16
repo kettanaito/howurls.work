@@ -11,7 +11,7 @@ const StyledFooter = styled.footer`
   a {
     color: var(--color-black);
 
-    :hover {
+    &:hover {
       color: var(--color-primary);
     }
   }
