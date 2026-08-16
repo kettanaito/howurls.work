@@ -1,9 +1,8 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { Heading } from './Heading'
-import { Chunk } from './Chunk'
+import { Link } from 'react-router'
+import { Heading } from './heading'
+import { Chunk } from './chunk'
 
 const createStandardComponent = (Name) => {
   return (...chunks) => <Name>{chunks}</Name>
@@ -21,70 +20,17 @@ const formattedMessageValues = {
   },
 }
 
-const UrlBox = styled.div`
-  display: inline-block;
-  padding: 1rem 1.25rem;
-  max-width: 100%;
-  width: 100%;
-  white-space: nowrap;
-  overflow-x: auto;
-
-  border: 1px solid hsla(220, 15%, 40%, 0.16);
-  border-radius: 0.5rem;
-  color: hsl(220, 15%, 40%);
-  font-family: var(--font-family-mono);
-  font-size: 1rem;
-
-  @media (min-width: 768px) {
-    font-size: 1.5rem;
-    overflow-x: initial;
-  }
-
-  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.006),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.008), 0 12.5px 10px rgba(0, 0, 0, 0.01),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.012), 0 41.8px 33.4px rgba(0, 0, 0, 0.014),
-    0 100px 80px rgba(0, 0, 0, 0.02);
-
-  a,
-  button {
-    padding: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    margin: 0;
-
-    display: inline-block;
-    background: none;
-    border: 0;
-    cursor: pointer;
-    font-size: inherit;
-    font-family: inherit;
-    text-decoration: none;
-
-    :focus {
-      outline: 0;
-      border-bottom: 1px dotted var(--color-primary);
-      color: var(--color-primary);
-      margin-bottom: -1px;
-    }
-
-    :hover {
-      color: var(--color-black);
-    }
-
-    :hover:not(.active) {
-      border-bottom: 1px dotted var(--color-primary);
-      margin-bottom: -1px;
-    }
-
-    &.active {
-      color: var(--color-primary);
-    }
-  }
-`
+const urlBoxClassNames = [
+  'inline-block w-full max-w-full px-[1.25rem] py-[1rem] overflow-x-auto whitespace-nowrap',
+  'rounded-[0.5rem] border border-[hsla(220,15%,40%,0.16)] text-[hsl(220,15%,40%)]',
+  'font-mono text-[1rem]',
+  'md:overflow-x-visible md:text-[1.5rem]',
+  'shadow-[0_2.8px_2.2px_rgba(0,0,0,0.006),0_6.7px_5.3px_rgba(0,0,0,0.008),0_12.5px_10px_rgba(0,0,0,0.01),0_22.3px_17.9px_rgba(0,0,0,0.012),0_41.8px_33.4px_rgba(0,0,0,0.014),0_100px_80px_rgba(0,0,0,0.02)]',
+].join(' ')
 
 export const UrlPreview = () => {
   return (
-    <UrlBox>
+    <div className={urlBoxClassNames}>
       <Chunk
         url="protocol"
         color="#c64b5d"
@@ -226,6 +172,6 @@ export const UrlPreview = () => {
       >
         #settings
       </Chunk>
-    </UrlBox>
+    </div>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from 'react'
-import { LocaleContext } from '../LocaleProvider'
+import { LocaleContext } from '../locale-provider'
 
 export const LanguageSwitch = () => {
   const localeContext = useContext(LocaleContext)
@@ -16,6 +16,7 @@ export const LanguageSwitch = () => {
   return (
     <span>
       <select
+        className="rounded-[4px] border border-[hsla(220,15%,40%,0.16)] bg-white px-2 py-1"
         name="locale"
         value={localeContext.locale}
         onChange={handleLocaleChange}
